@@ -40,6 +40,8 @@ public class User {
 	private String passwordHash;
 
 	@Enumerated
+	@NotNull
+	@Column(nullable = false)
 	private UserRole role;
 
 	public User() {
@@ -106,6 +108,7 @@ public class User {
 	}
 
 	public void setRole(UserRole role) {
+		checkRole(role);
 		this.role = role;
 	}
 
@@ -161,6 +164,12 @@ public class User {
 		}
 		if (passwordHash.isEmpty()) {
 			throw new IllegalArgumentException("User's passwordHash cannot be empty!");
+		}
+	}
+
+	private void checkRole(UserRole role) {
+		if (role == null) {
+			throw new IllegalArgumentException("User's role cannot be null!");
 		}
 	}
 }
