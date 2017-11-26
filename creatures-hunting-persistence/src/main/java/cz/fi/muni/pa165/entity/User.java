@@ -35,20 +35,26 @@ public class User {
 	@Column(nullable = false, unique = true)
 	private String email;
 
+	@NotNull
+	@Column(nullable = false)
+	private String passwordHash;
+
 	@Enumerated
 	private UserRole role;
 
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String email) {
+	public User(String firstName, String lastName, String email, String passwordHash) {
 		checkFirstName(firstName);
 		checkLastName(lastName);
 		checkEmail(email);
+		checkPasswordHash(passwordHash);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-
+		this.passwordHash = passwordHash;
+		this.role = UserRole.REGULAR;
 	}
 
 	public Long getId() {
@@ -84,6 +90,15 @@ public class User {
 	public void setEmail(String email) {
 		checkEmail(email);
 		this.email = email;
+	}
+
+	public String getPasswordHash() {
+		return passwordHash;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		checkPasswordHash(passwordHash);
+		this.passwordHash = passwordHash;
 	}
 
 	public UserRole getRole() {
@@ -137,6 +152,15 @@ public class User {
 		}
 		if (email.isEmpty()) {
 			throw new IllegalArgumentException("User's email cannot be empty!");
+		}
+	}
+
+	private void checkPasswordHash(String passwordHash) {
+		if (passwordHash == null) {
+			throw new IllegalArgumentException("User's passwordHash cannot be null!");
+		}
+		if (passwordHash.isEmpty()) {
+			throw new IllegalArgumentException("User's passwordHash cannot be empty!");
 		}
 	}
 }
