@@ -31,6 +31,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CONFIG, CONFIG_TOKEN} from "./app-config";
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import {ErrorInterceptor} from "./error-interceptor";
+import {AddMonstersToAreaComponent} from "./add-monsters-to-area-dialog/add-monsters-to-area-dialog.component";
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import {ErrorInterceptor} from "./error-interceptor";
     ManagerComponent,
     Error404Component,
     AddMonstersComponent,
+    AddMonstersToAreaComponent,
     ErrorDialogComponent
   ],
   imports: [
@@ -68,6 +70,7 @@ import {ErrorInterceptor} from "./error-interceptor";
   entryComponents: [
     AddMonstersComponent,
     ErrorDialogComponent,
+    AddMonstersToAreaComponent
   ],
   providers: [CookieService,
     {

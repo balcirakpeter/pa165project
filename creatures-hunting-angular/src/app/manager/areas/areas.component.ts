@@ -65,7 +65,7 @@ export class AreasComponent implements OnInit {
   removeArea(id){
     this.cookie = this.cookieService.check('creatures-token');
     this.checkIfCookieExist();
-    this.http.delete(this.config.apiEndpoint + '/pa165/rest/auth/areas/delete/' + id ,  {responseType: 'text', withCredentials: true}).subscribe(
+    this.http.delete(this.config.apiEndpoint + '/pa165/rest/auth/areas/' + id ,  {responseType: 'text', withCredentials: true}).subscribe(
       data => {
         this.loadAreas();
         console.log("Removing area with id: " + id + " was successful.");

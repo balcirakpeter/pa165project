@@ -89,13 +89,13 @@ public class AreaFacadeImpl implements AreaFacade {
 
     @Override
     public void addMonsterToArea(Long areaId, Long monsterId) {
-        areaService.addMonsterToArea(areaService.findById(monsterId),
-                monsterService.findById(areaId));
+        areaService.addMonsterToArea(areaService.findById(areaId),
+                monsterService.findById(monsterId));
     }
 
     @Override
     public void removeMonsterFromArea(Long areaId, Long monsterId) {
-        areaService.removeMonsterFromArea(areaService.findById(monsterId),
-                monsterService.findById(areaId));
+        areaService.removeMonsterFromArea(areaService.findById(areaId),
+                monsterService.findById(monsterId));
     }
 }
