@@ -5,17 +5,32 @@
   <div>
     <div>
       <mat-form-field>
-        <input matInput #name placeholder="Name" value="{{monster.name}}" disabled="{{!isAdmin}}">
+        <input matInput #name placeholder="Name" value="{{monster.name}}" disabled="{{!isAdmin}}"
+               pattern="^[a-zA-Z]+$" [formControl]="nameFormControl">
+        <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required') && nameFormControl.dirty">
+          This is not valid name!
+        </mat-error>
+        <mat-error *ngIf="nameFormControl.hasError('required') && nameFormControl.dirty">
+          Name is required!
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <input matInput #height placeholder="Height" value="{{monster.height}}" disabled="{{!isAdmin}}">
+        <input matInput #height placeholder="Height" value="{{monster.height}}" disabled="{{!isAdmin}}"
+               pattern="^(([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]*))$" [formControl]="heightFormControl">
+        <mat-error *ngIf="heightFormControl.hasError('pattern')">
+          This is not valid number!
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <input matInput #weight placeholder="Weight" value="{{monster.weight}}" disabled="{{!isAdmin}}">
+        <input matInput #weight placeholder="Weight" value="{{monster.weight}}" disabled="{{!isAdmin}}"
+               pattern="^(([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]*))$" [formControl]="weightFormControl">
+        <mat-error *ngIf="weightFormControl.hasError('pattern')">
+          This is not valid number!
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
@@ -28,5 +43,6 @@
       </mat-form-field>
     </div>
   </div>
-  <button mat-raised-button color="primary" (click)="updateMonster(name.value, height.value, weight.value, selectedAgility)" *ngIf="isAdmin">Update</button>
+  <button mat-raised-button color="primary" [disabled]="!heightFormControl.valid || !weightFormControl.valid || (!nameFormControl.valid && nameFormControl.dirty)"
+          (click)="updateMonster(name.value, height.value, weight.value, selectedAgility)" *ngIf="isAdmin">Update</button>
 </mat-card>

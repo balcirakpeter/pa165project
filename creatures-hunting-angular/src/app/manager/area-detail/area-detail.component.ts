@@ -6,6 +6,7 @@ import {MatDialog, MatTableDataSource} from "@angular/material";
 import {CookieService} from "ngx-cookie-service";
 import {AddMonstersToAreaComponent} from "../../add-monsters-to-area-dialog/add-monsters-to-area-dialog.component";
 import {ApplicationConfig, CONFIG_TOKEN} from "../../app-config";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-area-detail',
@@ -21,6 +22,7 @@ export class AreaDetailComponent implements OnInit {
   areaType: string;
   monsters: Monster[] = [];
   dataSource: MatTableDataSource<Monster>;
+  nameFormControl: FormControl;
 
   isAdmin: boolean = false;
 
@@ -40,6 +42,9 @@ export class AreaDetailComponent implements OnInit {
     this.cookie = this.cookieService.check('creatures-token');
     this.checkIsAdminCookie();
     this.loadData();
+    this.nameFormControl = new FormControl('', [
+      Validators.required,
+    ]);
   }
 
   checkIfCookieExist(){

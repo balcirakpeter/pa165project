@@ -7,6 +7,7 @@ import {CookieService} from "ngx-cookie-service";
 import {AddMonstersComponent} from "../../add-monsters-dialog/add-monsters-dialog.component";
 import {ApplicationConfig, CONFIG_TOKEN} from "../../app-config";
 import {ErrorDialogComponent} from "../../error-dialog/error-dialog.component";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-weapon-detail',
@@ -22,6 +23,9 @@ export class WeaponDetailComponent implements OnInit {
   weaponType: string;
   appropriateMonsters: Monster[] = [];
   dataSource: MatTableDataSource<Monster>;
+  nameFormControl: FormControl;
+  rangeFormControl: FormControl;
+  magazineFormControl: FormControl;
 
   isAdmin: boolean = false;
 
@@ -49,6 +53,11 @@ export class WeaponDetailComponent implements OnInit {
     }
     this.checkIsAdminCookie();
     this.loadData();
+    this.nameFormControl = new FormControl('', [
+      Validators.required,
+    ]);
+    this.rangeFormControl = new FormControl('', []);
+    this.magazineFormControl = new FormControl('', []);
   }
 
   checkIfCookieExist(){

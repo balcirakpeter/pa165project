@@ -6,7 +6,13 @@
   <div>
     <div>
       <mat-form-field>
-        <input matInput #name  placeholder="Name" value="{{area.name}}" disabled="{{!isAdmin}}" class="attribute">
+        <input matInput #name  placeholder="Name" value="{{area.name}}" disabled="{{!isAdmin}}" class="attribute" pattern="^[a-zA-Z]+$" [formControl]="nameFormControl">
+        <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')">
+          This is not valid name!
+        </mat-error>
+        <mat-error *ngIf="nameFormControl.hasError('required') && nameFormControl.dirty">
+          Name is required!
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
@@ -21,7 +27,8 @@
       </mat-form-field>
     </div>
 
-    <button *ngIf="isAdmin" mat-raised-button color="primary" (click)="updateArea(name.value, areaType)">Update</button>
+    <button *ngIf="isAdmin" mat-raised-button color="primary" [disabled]="!nameFormControl.valid && nameFormControl.dirty"
+            (click)="updateArea(name.value, areaType)">Update</button>
     <button mat-raised-button color="primary" (click)="showMonsters()">Add spotted monster</button>
 
 

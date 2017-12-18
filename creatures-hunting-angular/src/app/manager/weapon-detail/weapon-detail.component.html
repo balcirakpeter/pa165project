@@ -6,7 +6,13 @@
   <div>
     <div>
       <mat-form-field>
-        <input matInput #name  placeholder="Name" value="{{weapon.name}}" disabled="{{!isAdmin}}" class="attribute">
+        <input matInput #name  placeholder="Name" value="{{weapon.name}}" disabled="{{!isAdmin}}" class="attribute" pattern="^[a-zA-Z]+$" [formControl]="nameFormControl">
+        <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')">
+          This is not valid name!
+        </mat-error>
+        <mat-error *ngIf="nameFormControl.hasError('required') && nameFormControl.dirty">
+          Name is required!
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
@@ -23,16 +29,25 @@
 
     <div>
       <mat-form-field>
-        <input matInput #range placeholder="Range" value="{{weapon.range}}" disabled="{{!isAdmin}}">
+        <input matInput #range placeholder="Range" value="{{weapon.range}}" disabled="{{!isAdmin}}"
+               pattern="^[0-9]*$" [formControl]="rangeFormControl">
+        <mat-error *ngIf="rangeFormControl.hasError('pattern')">
+          This is not valid number!
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <input matInput #magazineCapacity placeholder="Magazine Capacity" value="{{weapon.magazineCapacity}}" disabled="{{!isAdmin}}">
+        <input matInput #magazineCapacity placeholder="Magazine Capacity" value="{{weapon.magazineCapacity}}" disabled="{{!isAdmin}}"
+               pattern="^[0-9]*$" [formControl]="magazineFormControl">
+        <mat-error *ngIf="magazineFormControl.hasError('pattern')">
+          This is not valid number!
+        </mat-error>
       </mat-form-field>
     </div>
 
-    <button *ngIf="isAdmin" mat-raised-button color="primary" (click)="updateWeapon(name.value, weaponType, range.value, magazineCapacity.value)">Update</button>
+    <button *ngIf="isAdmin" mat-raised-button color="primary" [disabled]="!magazineFormControl.valid || !rangeFormControl.valid || (!nameFormControl.valid && nameFormControl.dirty)"
+            (click)="updateWeapon(name.value, weaponType, range.value, magazineCapacity.value)">Update</button>
     <button mat-raised-button color="primary" (click)="showMonsters()">Add appropriate monster</button>
 
 

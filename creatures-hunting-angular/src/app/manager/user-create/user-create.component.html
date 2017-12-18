@@ -68,7 +68,8 @@
         </mat-error>
       </div>
       <button mat-raised-button color="primary" matStepperPrevious class="previousButtons">Back</button>
-      <button mat-raised-button color="primary" (click)="createUser(firstName.value, lastName.value, email.value, password.value)">Create</button>
+      <button mat-raised-button color="primary" [disabled]="!fourthFormGroup.valid"
+              (click)="createUser(firstName.value, lastName.value, email.value, password.value)">Create</button>
     </form>
   </mat-step>
 </mat-horizontal-stepper>

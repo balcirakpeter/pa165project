@@ -6,6 +6,7 @@ import {ApplicationConfig, CONFIG_TOKEN} from "../../app-config";
 import {AddMonstersComponent} from "../../add-monsters-dialog/add-monsters-dialog.component";
 import {MatDialog} from "@angular/material";
 import {ErrorDialogComponent} from "../../error-dialog/error-dialog.component";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-monster-create',
@@ -15,6 +16,9 @@ import {ErrorDialogComponent} from "../../error-dialog/error-dialog.component";
 export class MonsterCreateComponent implements OnInit {
 
   cookie: boolean = false;
+  nameFormControl: FormControl;
+  heightFormControl: FormControl;
+  weightFormControl: FormControl;
 
   agility: string;
 
@@ -36,6 +40,12 @@ export class MonsterCreateComponent implements OnInit {
       return;
     }
     this.checkIfCookieExist();
+
+    this.nameFormControl = new FormControl('', [
+      Validators.required,
+    ]);
+    this.heightFormControl = new FormControl('', []);
+    this.weightFormControl = new FormControl('', []);
   }
 
   checkIfCookieExist(){
