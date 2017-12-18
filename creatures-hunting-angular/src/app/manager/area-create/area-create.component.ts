@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Area} from "../../entity.module";
 import {CookieService} from "ngx-cookie-service";
 import {ApplicationConfig, CONFIG_TOKEN} from "../../app-config";
+import {FormControl, Validators} from "@angular/forms";
 @Component({
   selector: 'app-area-create',
   templateUrl: './area-create.component.html',
@@ -14,6 +15,7 @@ export class AreaCreateComponent implements OnInit {
 
   cookie: boolean = false;
   areaType: string;
+  nameFormControl: FormControl;
 
   type: string;
 
@@ -26,6 +28,9 @@ export class AreaCreateComponent implements OnInit {
   ngOnInit() {
     this.cookie = this.cookieService.check('creatures-token');
     this.checkIfCookieExist();
+    this.nameFormControl = new FormControl('', [
+      Validators.required,
+    ]);
   }
 
   checkIfCookieExist() {

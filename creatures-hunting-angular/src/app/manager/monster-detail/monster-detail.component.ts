@@ -6,6 +6,7 @@ import {CookieService} from "ngx-cookie-service";
 import {ApplicationConfig, CONFIG_TOKEN} from "../../app-config";
 import {ErrorDialogComponent} from "../../error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
+import {FormControl, Validators} from "@angular/forms";
 
 
 @Component({
@@ -21,6 +22,9 @@ export class MonsterDetailComponent implements OnInit {
   selectedAgility: string;
   cookie: boolean = false;
   isAdmin: boolean = false;
+  nameFormControl: FormControl;
+  heightFormControl: FormControl;
+  weightFormControl: FormControl;
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
@@ -43,6 +47,11 @@ export class MonsterDetailComponent implements OnInit {
     }
     this.checkIsAdminCookie();
     this.loadData();
+    this.nameFormControl = new FormControl('', [
+      Validators.required
+    ]);
+    this.heightFormControl = new FormControl();
+    this.weightFormControl = new FormControl();
   }
 
   checkIsAdminCookie(){

@@ -7,6 +7,7 @@ import {CookieService} from "ngx-cookie-service";
 import {ApplicationConfig, CONFIG_TOKEN} from "../../app-config";
 import {ErrorDialogComponent} from "../../error-dialog/error-dialog.component";
 import {MatDialog} from "@angular/material";
+import {FormControl, Validators} from "@angular/forms";
 @Component({
   selector: 'app-weapon-create',
   templateUrl: './weapon-create.component.html',
@@ -15,7 +16,9 @@ import {MatDialog} from "@angular/material";
 export class WeaponCreateComponent implements OnInit {
 
   cookie: boolean = false;
-
+  nameFormControl: FormControl;
+  rangeFormControl: FormControl;
+  magazineFormControl: FormControl;
   type: string;
 
   constructor(private http: HttpClient,
@@ -34,6 +37,11 @@ export class WeaponCreateComponent implements OnInit {
       });
       return;
     }
+    this.nameFormControl = new FormControl('', [
+      Validators.required,
+    ]);
+    this.rangeFormControl = new FormControl('', []);
+    this.magazineFormControl = new FormControl('', []);
   }
 
   checkIfCookieExist(){
