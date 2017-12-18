@@ -7,6 +7,7 @@ import {CookieService} from "ngx-cookie-service";
 import {AddMonstersToAreaComponent} from "../../add-monsters-to-area-dialog/add-monsters-to-area-dialog.component";
 import {ApplicationConfig, CONFIG_TOKEN} from "../../app-config";
 import {FormControl, Validators} from "@angular/forms";
+import {ErrorDialogComponent} from "../../error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-area-detail',
@@ -40,6 +41,14 @@ export class AreaDetailComponent implements OnInit {
 
   ngOnInit() {
     this.cookie = this.cookieService.check('creatures-token');
+    if (!this.cookie) {
+      this.router.navigate(['/pa165/login']);
+      this.dialog.open(ErrorDialogComponent, {
+        width: '600px',
+        data: ["User is not logged in."],
+      });
+      return;
+    }
     this.checkIsAdminCookie();
     this.loadData();
     this.nameFormControl = new FormControl('', [
@@ -96,7 +105,7 @@ export class AreaDetailComponent implements OnInit {
   removeMonsterFromArea(monsterId){
     this.cookie = this.cookieService.check('creatures-token');
     this.checkIfCookieExist();
-    this.http.put(this.config.apiEndpoint + '/pa165/rest/auth/areas/' + this.areaId + '/removeMonsterFromArea?monsterId='+ monsterId ,  null, {responseType: 'text', withCredentials: true}).subscribe(
+    this.http.post(this.config.apiEndpoint + '/pa165/rest/auth/areas/' + this.areaId + '/removeMonsterFromArea?id='+ monsterId ,  null, {responseType: 'text', withCredentials: true}).subscribe(
       data => {
         console.log("Removing monster with id: " + monsterId + " from area with id: " + this.areaId + "was successful.");
         this.loadData();
