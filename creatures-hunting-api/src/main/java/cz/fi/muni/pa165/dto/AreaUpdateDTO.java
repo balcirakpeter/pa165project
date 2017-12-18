@@ -42,6 +42,7 @@ public class AreaUpdateDTO {
         this.type = type;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -56,6 +57,7 @@ public class AreaUpdateDTO {
         if (name != null ? !name.equals(that.getName()) : that.getName() != null) {
             return false;
         }
+
         
         return type != null ? type.equals(that.getType()) : that.getType() == null;
     }

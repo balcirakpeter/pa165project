@@ -40,6 +40,7 @@ public interface AreaFacade {
      * @param update To be used.
      * @return Updated AreaDTO
      */
+
     AreaDTO updateArea(AreaUpdateDTO update);
 
     /**

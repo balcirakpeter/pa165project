@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.dto.AreaCreateDTO;
 import cz.fi.muni.pa165.dto.AreaDTO;
 import cz.fi.muni.pa165.dto.AreaUpdateDTO;
 import cz.fi.muni.pa165.enums.AreaType;
+
 import cz.fi.muni.pa165.enums.UserRole;
 import cz.fi.muni.pa165.facade.AreaFacade;
 import cz.fi.muni.pa165.facade.MonsterFacade;
@@ -12,6 +13,7 @@ import cz.fi.muni.pa165.rest.ApiUris;
 import cz.fi.muni.pa165.rest.exceptions.InvalidParameterException;
 import cz.fi.muni.pa165.rest.exceptions.ResourceAlreadyExistingException;
 import cz.fi.muni.pa165.rest.exceptions.ResourceNotFoundException;
+
 import cz.fi.muni.pa165.rest.security.RoleResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import org.springframework.data.repository.query.Param;
@@ -31,6 +34,7 @@ import org.springframework.data.repository.query.Param;
  *
  * @author Jan GOl <gol.honza@gmail.com>
  */
+
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_AREAS)
 public class AreaController {

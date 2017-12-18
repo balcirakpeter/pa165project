@@ -62,6 +62,7 @@ public class AreaFacadeImpl implements AreaFacade {
     }
 
     @Override
+
     public List<AreaDTO> getTheMostDangerousAreas() {
         return beanMappingService.mapTo(areaService.getTheMostDangerousAreas(), AreaDTO.class);
     }
