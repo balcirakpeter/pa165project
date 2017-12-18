@@ -19,8 +19,13 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req)
       .catch((err: HttpErrorResponse) => {
         let errors = [];
-        errors.push(err.error.errors);
-        if (errors.length == 0) {
+        if (typeof err.error === "string") {
+          errors.push(JSON.parse(err.error).errors);
+        } else{
+          errors.push(err.error.errors);
+        }
+
+        if (errors == undefined || errors.length == 0) {
           errors.push(err.statusText);
         }
 
