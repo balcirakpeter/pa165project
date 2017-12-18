@@ -1,8 +1,10 @@
 package cz.fi.muni.pa165.sampledata;
 
+import cz.fi.muni.pa165.entity.Area;
 import cz.fi.muni.pa165.entity.Monster;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.entity.Weapon;
+import cz.fi.muni.pa165.enums.AreaType;
 import cz.fi.muni.pa165.enums.MonsterAgility;
 import cz.fi.muni.pa165.enums.WeaponType;
 import cz.fi.muni.pa165.service.AreaService;
@@ -123,7 +125,29 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
 	@Override
 	public void loadAreaData() {
+		Area district = new Area();
+		district.setName("District");
+		district.setType(AreaType.DISTRICT);
 
+		Area mountains = new Area();
+		mountains.setName("Mountains");
+		mountains.setType(AreaType.MOUNTAINS);
+
+		Area desert = new Area();
+		desert.setName("Desert");
+		desert.setType(AreaType.DESERT);
+
+		areaService.createArea(district);
+		areaService.createArea(mountains);
+		areaService.createArea(desert);
+
+		Monster squirrel = new Monster("Squirrel");
+		squirrel.setAgility(MonsterAgility.FAST);
+		squirrel.setHeight(2.5);
+		squirrel.setWeight(4.2);
+
+		monsterService.createMonster(squirrel);
+		areaService.addMonsterToArea(district, squirrel);
 	}
 
 	@Override
