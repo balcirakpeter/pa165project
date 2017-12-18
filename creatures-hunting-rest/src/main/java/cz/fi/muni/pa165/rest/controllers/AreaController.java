@@ -11,6 +11,7 @@ import cz.fi.muni.pa165.facade.AreaFacade;
 import cz.fi.muni.pa165.facade.MonsterFacade;
 import cz.fi.muni.pa165.rest.ApiUris;
 import cz.fi.muni.pa165.rest.exceptions.InvalidParameterException;
+import cz.fi.muni.pa165.rest.exceptions.PrivilegeException;
 import cz.fi.muni.pa165.rest.exceptions.ResourceAlreadyExistingException;
 import cz.fi.muni.pa165.rest.exceptions.ResourceNotFoundException;
 
@@ -81,7 +82,9 @@ public class AreaController {
 
         log.debug("rest createArea({})", area);
 
-        //roleResolver.hasRole(request, UserRole.ADMIN);
+        if(!roleResolver.hasRole(request, UserRole.ADMIN)) {
+            throw new PrivilegeException("Not permitted.");
+        }
 
         AreaDTO areaWithSameName = areaFacade.findByName(area.getName());
         if (areaWithSameName != null) {
@@ -105,7 +108,9 @@ public class AreaController {
 
         log.debug("rest deleteArea({})", id);
 
-        roleResolver.hasRole(request, UserRole.ADMIN);
+        if(!roleResolver.hasRole(request, UserRole.ADMIN)) {
+            throw new PrivilegeException("Not permitted.");
+        }
 
         try {
             areaFacade.deleteArea(id);
@@ -133,7 +138,9 @@ public class AreaController {
 
         log.debug("rest updateArea({})", areaUpdate);
 
-        roleResolver.hasRole(request, UserRole.ADMIN);
+        if(!roleResolver.hasRole(request, UserRole.ADMIN)) {
+            throw new PrivilegeException("Not permitted.");
+        }
 
         if (areaUpdate.getId() == null) {
             throw new InvalidParameterException("Value 'id' is required.");
