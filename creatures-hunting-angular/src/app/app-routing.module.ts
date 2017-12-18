@@ -71,7 +71,7 @@ const routes: Routes = [
         component: AreaDetailComponent
       },
       {
-        path: 'areas/new',
+        path: 'create/area',
         component: AreaCreateComponent
       }
     ]

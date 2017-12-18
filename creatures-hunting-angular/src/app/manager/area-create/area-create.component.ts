@@ -13,6 +13,7 @@ import {ApplicationConfig, CONFIG_TOKEN} from "../../app-config";
 export class AreaCreateComponent implements OnInit {
 
   cookie: boolean = false;
+  areaType: string;
 
   type: string;
 
@@ -31,5 +32,19 @@ export class AreaCreateComponent implements OnInit {
     if (!this.cookie) {
       this.router.navigate(['/login']);
     }
+  }
+
+  createArea(name, areaType){
+    this.cookie = this.cookieService.check('creatures-token');
+    this.checkIfCookieExist();
+    var json = {"name": name,"type":areaType};
+    this.http.post(this.config.apiEndpoint + '/pa165/rest/auth/areas/create', json, {withCredentials: true}).subscribe(
+      data => {
+        console.log("Updating area with name: " + name + ", type: " + areaType + "was successful.");
+        this.router.navigate(['/areas']);
+      }, error => {
+        console.log("Error during updating area with name: " + name + ", type: " + areaType + "was successful.");
+      }
+    )
   }
 }

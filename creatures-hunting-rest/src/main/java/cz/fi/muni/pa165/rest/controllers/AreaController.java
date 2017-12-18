@@ -81,7 +81,7 @@ public class AreaController {
 
         log.debug("rest createArea({})", area);
 
-        roleResolver.hasRole(request, UserRole.ADMIN);
+        //roleResolver.hasRole(request, UserRole.ADMIN);
 
         AreaDTO areaWithSameName = areaFacade.findByName(area.getName());
         if (areaWithSameName != null) {

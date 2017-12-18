@@ -105,7 +105,7 @@ updateArea(name, areaType){
     this.cookie = this.cookieService.check('creatures-token');
     this.checkIfCookieExist();
     var json = {"id":this.areaId,"name": name,"type":areaType};
-    this.http.put(this.config.apiEndpoint + '/pa165/rest/auth/areas/update/' + this.areaId, json, {withCredentials: true}).subscribe(
+    this.http.put(this.config.apiEndpoint + '/pa165/rest/auth/areas/update' , json, {withCredentials: true}).subscribe(
       data => {
         console.log("Updating area with name: " + name + ", type: " + areaType + "was successful.");
         this.loadData();

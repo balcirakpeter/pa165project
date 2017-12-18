@@ -65,7 +65,7 @@ export class AddMonstersToAreaComponent implements OnInit {
 
     this.cookie = this.cookieService.check('creatures-token');
     this.checkIfCookieExist();
-    this.http.put(this.config.apiEndpoint + '/pa165/rest/auth/areas/' + this.area.id + '/addMonsterToArea?monsterId='+ monsterId ,  null, {responseType: 'text', withCredentials: true}).subscribe(
+    this.http.post(this.config.apiEndpoint + '/pa165/rest/auth/areas/' + this.area.id + '/addMonsterToArea?id='+ monsterId ,  null, {responseType: 'text', withCredentials: true}).subscribe(
       data => {
         this.filterAddedMonster(monsterId);
         this.loadData();
