@@ -116,7 +116,7 @@ public class UsersController {
 	 * @param id identifier of user
 	 * @throws ResourceNotFoundException when user with given ID wasn't found
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public final void deleteUser(@PathVariable("id") long id, HttpServletRequest request) {
 
 		log.debug("rest deleteUser({})", id);
@@ -143,7 +143,7 @@ public class UsersController {
 	 * @param unencryptedPassword password
 	 * @throws ResourceAlreadyExistingException when user with given email already exists
 	 */
-	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public final void registerUser(@RequestBody UserDTO userDTO,
 	                               @RequestParam("unencryptedPassword") String unencryptedPassword,
 	                               HttpServletRequest request){
@@ -193,7 +193,7 @@ public class UsersController {
 	 *
 	 * @param id identified of the user
 	 */
-	@RequestMapping(value = "/setAdmin", method = RequestMethod.PUT)
+	@RequestMapping(value = "/setAdmin", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public final void setAdmin(@RequestParam("id") long id, HttpServletRequest request){
 		log.debug("Rest setAdmin ({})", id);
 
@@ -217,7 +217,7 @@ public class UsersController {
 	 *
 	 * @param id identified of the user
 	 */
-	@RequestMapping(value = "/removeAdmin", method = RequestMethod.PUT)
+	@RequestMapping(value = "/removeAdmin", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public final void removeAdmin(@RequestParam("id") long id, HttpServletRequest request){
 		log.debug("Rest removeAdmin ({})", id);
 
